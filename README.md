@@ -2,8 +2,7 @@
 
 # Felia Wallet
 
-![buildStatus](https://img.shields.io/github/workflow/status/LinDevHard/Felia Wallet/Java%20CI%20with%20Gradle?style=plastic)
-![latestVersion](https://img.shields.io/github/v/release/LinDevHard/Felia Wallet)
+![latestVersion](https://img.shields.io/github/v/release/LinDevHard/FeliaWallet)
 
 > Felia Wallet is decentralized crypto wallet.
 
@@ -44,7 +43,9 @@ Give a ⭐️ if this project helped you!
 
 ## ☑️ TODO
 
-- [ ] Task 1
+- [ ] Add core logic of eth wallet
+- [ ] Add ui for main screens 
+- [ ] Migrate project to multiplatform and create desktop target
 
 ## 📝 License
 
