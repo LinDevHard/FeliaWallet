@@ -9,6 +9,10 @@ import timber.log.Timber
 
 class FeliaApp : Application() {
 
+    init {
+        System.loadLibrary("TrustWalletCore")
+    }
+
     override fun onCreate() {
         super.onCreate()
 

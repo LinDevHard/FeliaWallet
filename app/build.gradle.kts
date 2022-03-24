@@ -1,3 +1,5 @@
+import Dependencies.ArkIvanov.Decompose.decompose
+import Dependencies.ArkIvanov.Decompose.extensionsCompose
 import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
@@ -138,7 +140,15 @@ dependencies {
         implementation(accompanistInsets)
     }
 
+    with(Dependencies.ArkIvanov) {
+        implementation(decompose)
+        implementation(extensionsCompose)
+    }
     // Splash Screen
     implementation(Dependencies.Android.splashScreenCore)
+
+    with(Dependencies.Blockchain) {
+        implementation(hdWallet)
+    }
 
 }

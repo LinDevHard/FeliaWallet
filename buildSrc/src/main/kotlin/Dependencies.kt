@@ -15,6 +15,7 @@ object Dependencies {
             private const val VERSION = "1.6.0"
             val core by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:$VERSION" }
             val android by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:$VERSION" }
+            val rx2 by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$VERSION" }
 
         }
     }
@@ -58,7 +59,7 @@ object Dependencies {
         }
 
         object Decompose {
-            private const val VERSION = "0.3.1"
+            private const val VERSION = "0.5.2"
             val decompose by lazy { "com.arkivanov.decompose:decompose:$VERSION" }
             val extensionsCompose by lazy {
                 "com.arkivanov.decompose:extensions-compose-jetbrains:$VERSION"
@@ -91,6 +92,12 @@ object Dependencies {
         val slf4j by lazy { "org.slf4j:slf4j-simple:${Versions.slf4j}" }
         val logback by lazy { "ch.qos.logback:logback-classic:${Versions.logback}" }
         val kermit by lazy { "co.touchlab:kermit:${Versions.kermit}" }
+    }
+
+    object Blockchain {
+        val web3j by lazy { "org.web3j:core:4.8.7-android" }
+        val hdWallet by lazy { "com.trustwallet:wallet-core:2.6.3" }
+        val binanceChain by lazy { "com.github.jjos2372:java-sdk:4739af9c11" }
     }
 
     object Android {
@@ -160,7 +167,33 @@ object Dependencies {
         val roomKtx by lazy { "androidx.room:room-ktx:${Versions.room}" }
         val roomTest by lazy { "androidx.room:room-testing:${Versions.room}" }
 
+        // gson
+        val gson by lazy { "com.google.code.gson:gson:2.9.0" }
+
+        // Network
+        object OkHttp {
+            private val okHttpVersion by lazy { "4.9.1" }
+
+            val core by lazy { "com.squareup.okhttp3:okhttp:$okHttpVersion" }
+            val logging by lazy { "com.squareup.okhttp3:logging-interceptor:$okHttpVersion" }
+        }
+
+        object Retrofit {
+            private val version by lazy { "2.9.0" }
+
+            val core by lazy { "com.squareup.retrofit2:retrofit:$version" }
+            val gson by lazy { "com.squareup.retrofit2:converter-gson:$version" }
+            val scalars by lazy { "com.squareup.retrofit2:converter-scalars:$version" }
+            val adapter by lazy { "com.github.haroldadmin:NetworkResponseAdapter:4.1.0" }
+        }
+
+
+
         // Preferences DataStore
+        object DataStore {
+            val preferences by lazy { "androidx.datastore:datastore-preferences:${Versions.dataStore}" }
+            val proto by lazy { "androidx.datastore:datastore:${Versions.dataStore}" }
+        }
         val prefDataStore by lazy { "androidx.datastore:datastore-preferences:${Versions.dataStore}" }
 
         // Splash Screen
@@ -173,6 +206,9 @@ object Dependencies {
         // Glance AppWidget - Early Snapshot
         val glanceAppWidget by lazy { "androidx.glance:glance-appwidget:${Versions.glanceAppWidget}" }
 
+        // crypto
+        val tink by lazy { "com.google.crypto.tink:tink-android:1.5.0" }
+        val protobuf by lazy { "com.google.protobuf:protobuf-javalite:3.10.0" }
     }
 
 }

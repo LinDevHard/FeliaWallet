@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "com.gexabyte.android.wallet.core";
+option java_multiple_files = true;
+
+message Wallet {
+  string seed_phrase = 1;
+  string pass_phrase = 2;
+}
