@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Felia Wallet</string>
+    <string name="msg_enter_create_wallet">Create new wallet</string>
+    <string name="msg_already_have_wallet">Already have wallet</string>
+    <string name="msg_create_wallet">Create wallet</string>
+    <string name="msg_import_wallet">Import wallet</string>
+    <string name="msg_user_import_wallet">Enter the Seed phrase in the correct order separated by space</string>
+    <string name="msg_user_create_wallet">Write down or copy these words in the right order and save them somewhere safe.</string>
 </resources>

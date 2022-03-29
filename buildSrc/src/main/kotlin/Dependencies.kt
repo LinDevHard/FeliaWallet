@@ -208,7 +208,7 @@ object Dependencies {
 
         // crypto
         val tink by lazy { "com.google.crypto.tink:tink-android:1.5.0" }
-        val protobuf by lazy { "com.google.protobuf:protobuf-javalite:3.10.0" }
+        val protobuf by lazy { "com.google.protobuf:protobuf-java:3.12.0" }
     }
 
 }

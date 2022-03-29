@@ -31,6 +31,11 @@ val Typography = Typography(
         fontWeight = FontWeight.SemiBold,
         fontSize = 18.sp,
     ),
+    h4 = TextStyle(
+        fontFamily = OpenSans,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 16.sp,
+    ),
     body1 = TextStyle(
         fontFamily = OpenSans,
         fontWeight = FontWeight.Normal,

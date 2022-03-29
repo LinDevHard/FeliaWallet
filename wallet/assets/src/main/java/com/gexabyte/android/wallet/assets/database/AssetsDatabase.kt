@@ -11,7 +11,8 @@ import com.gexabyte.android.wallet.assets.database.entity.CryptoAssetEntity
     entities = [
         AssetsVersionEntity::class,
         CryptoAssetEntity::class
-    ], version = 1
+    ], version = 1,
+    exportSchema = true,
 )
 internal abstract class AssetsDatabase: RoomDatabase() {
     abstract fun versionDao(): AssetsVersionDao

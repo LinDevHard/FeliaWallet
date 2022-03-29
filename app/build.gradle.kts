@@ -24,13 +24,13 @@ android {
 
         val properties = Properties()
         properties.load(
-                project.rootProject.file("local.properties")
-                        .reader()
+            project.rootProject.file("local.properties")
+                .reader()
         )
         buildConfigField(
-                "String",
-                "cmcApiKey",
-                properties.getProperty("cmcApiKey")
+            "String",
+            "cmcApiKey",
+            properties.getProperty("cmcApiKey")
         )
     }
 
@@ -38,8 +38,8 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
@@ -64,12 +64,15 @@ android {
     packagingOptions {
         resources {
             excludes += mutableSetOf(
-                    "/META-INF/{AL2.0,LGPL2.1}",
-                    "META-INF/licenses/ASM"
+                "/META-INF/{AL2.0,LGPL2.1}",
+                "META-INF/licenses/ASM",
+                "META-INF/DEPENDENCIES"
             )
             pickFirsts += mutableSetOf(
-                    "win32-x86-64/attach_hotspot_windows.dll",
-                    "win32-x86/attach_hotspot_windows.dll"
+                "protobuf.meta",
+                "field_mask.proto",
+                "win32-x86-64/attach_hotspot_windows.dll",
+                "win32-x86/attach_hotspot_windows.dll"
             )
         }
     }
@@ -77,12 +80,26 @@ android {
 
 dependencies {
     implementation(project(":compose-ui"))
+
+    implementation(project(":wallet:core"))
+    implementation(project(":wallet:assets"))
+    implementation(project(":wallet:rates"))
+    implementation(project(":wallet:ethereum"))
+
     // Core Functionality
     with(Dependencies.Android) {
         implementation(coreKtx)
         implementation(appCompat)
         implementation(material)
         implementation(lifecycleRuntimeKtx)
+    }
+
+    // MVI
+    with(Dependencies.ArkIvanov.MVIKotlin) {
+        implementation(mviKotlin)
+        implementation(mviKotlinMain)
+        implementation(mviKotlinExtensionsCoroutines)
+        implementation(rx)
     }
 
     // Testing
