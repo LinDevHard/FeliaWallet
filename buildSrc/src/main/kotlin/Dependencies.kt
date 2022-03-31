@@ -160,6 +160,7 @@ object Dependencies {
         // Accompanist
         val accompanistInsets by lazy { "com.google.accompanist:accompanist-insets:${Versions.accompanist}" }
         val accompanistNavigationAnimations by lazy { "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}" }
+        val flowLayout by lazy { "com.google.accompanist:accompanist-flowlayout:${Versions.accompanist}" }
 
         // Room
         val roomRuntime by lazy { "androidx.room:room-runtime:${Versions.room}" }

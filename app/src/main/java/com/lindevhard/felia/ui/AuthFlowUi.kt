@@ -5,6 +5,7 @@ import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetbrains.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.animation.child.slide
 import com.lindevhard.felia.component.auth.AuthFlow
+import com.lindevhard.felia.ui.create_wallet.CreateWalletUi
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable

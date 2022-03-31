@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.RouterState
 import com.arkivanov.decompose.router.push
+import com.arkivanov.decompose.router.replaceCurrent
 import com.arkivanov.decompose.router.router
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
@@ -57,7 +58,7 @@ class FeliaRootComponent internal constructor(
         }
 
     private fun navigateToMain() {
-        router.push(Configuration.Main)
+        router.replaceCurrent(Configuration.Main)
     }
 
     private sealed class Configuration : Parcelable {

@@ -155,6 +155,7 @@ dependencies {
     // Accompanist
     with(Dependencies.Android) {
         implementation(accompanistInsets)
+        implementation(flowLayout)
     }
 
     with(Dependencies.ArkIvanov) {

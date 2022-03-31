@@ -10,4 +10,7 @@
     <string name="msg_ok">OK</string>
     <string name="msg_import_wallet_error">Seed phrase invalid. Please try again</string>
     <string name="msg_wallet">Wallet</string>
+    <string name="msg_create_wallet_created">New wallet created</string>
+    <string name="msg_copy_seed">Copy seed pharase</string>
+    <string name="msg_copied">Copied</string>
 </resources>

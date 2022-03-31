@@ -10,7 +10,6 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.lindevhard.felia.component.auth.AuthFlow.Child
 import com.lindevhard.felia.component.create_wallet.CreateWallet
-import com.lindevhard.felia.component.create_wallet.CreateWalletComponent
 import com.lindevhard.felia.component.import_wallet.ImportWallet
 import com.lindevhard.felia.component.start.FeliaStartComponent
 import kotlinx.parcelize.Parcelize
@@ -43,7 +42,11 @@ class AuthFlowComponent(
             )
         )
         Configuration.CreateWallet -> {
-            Child.Create(CreateWalletComponent(::onCreateWalletOutput))
+            val createWalletComponent by inject<CreateWallet> {
+                parametersOf(componentContext, ::onCreateWalletOutput)
+            }
+
+            Child.Create(createWalletComponent)
         }
         Configuration.ImportWallet -> {
             val importWalletComponent by inject<ImportWallet> {
@@ -57,6 +60,9 @@ class AuthFlowComponent(
     private fun onCreateWalletOutput(output: CreateWallet.Output) {
         when (output) {
             CreateWallet.Output.Closed -> router.pop()
+            CreateWallet.Output.Created -> {
+                onCompleteAuth()
+            }
         }
     }
 
