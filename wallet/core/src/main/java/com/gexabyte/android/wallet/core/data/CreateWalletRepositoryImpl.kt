@@ -1,5 +1,6 @@
 package com.gexabyte.android.wallet.core.data
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import com.gexabyte.android.wallet.core.Wallet
 import com.gexabyte.android.wallet.core.domain.InitWalletRepository
@@ -7,6 +8,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -69,5 +71,13 @@ internal class CreateWalletRepositoryImpl(
 
     override suspend fun loadWalletMnemonic(): String {
         return walletDataStore.data.first().seedPhrase
+    }
+
+    override suspend fun isWalletSaved(): Boolean {
+        return withContext(ioDispatcher) {
+            walletDataStore.data.map { wallet ->
+                !wallet.seedPhrase.isNullOrEmpty()
+            }.first()
+        }
     }
 }

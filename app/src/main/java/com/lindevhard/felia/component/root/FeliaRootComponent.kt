@@ -3,29 +3,36 @@ package com.lindevhard.felia.component.root
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.RouterState
-import com.arkivanov.decompose.router.pop
 import com.arkivanov.decompose.router.push
 import com.arkivanov.decompose.router.router
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.lindevhard.felia.component.create_wallet.CreateWallet
-import com.lindevhard.felia.component.create_wallet.CreateWalletComponent
-import com.lindevhard.felia.component.import_wallet.ImportWallet
-import com.lindevhard.felia.component.import_wallet.ImportWalletComponent
+import com.gexabyte.android.wallet.core.domain.InitWalletRepository
+import com.lindevhard.felia.component.auth.AuthFlow
 import com.lindevhard.felia.component.main.FeliaMainComponent
 import com.lindevhard.felia.component.root.FeliaRoot.Child
-import com.lindevhard.felia.component.start.FeliaStartComponent
+import kotlinx.coroutines.runBlocking
 import kotlinx.parcelize.Parcelize
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.parameter.parametersOf
 
 class FeliaRootComponent internal constructor(
     componentContext: ComponentContext,
-    private val storeFactory: StoreFactory,
-) : FeliaRoot, ComponentContext by componentContext {
+    private val walletRepository: InitWalletRepository,
+) : FeliaRoot, KoinComponent, ComponentContext by componentContext {
 
-    private val router: Router<Configuration, Child> =
-        router(
-            initialConfiguration = Configuration.Start,
+    private val startDestination : Configuration by lazy {
+        runBlocking {
+            if (walletRepository.isWalletSaved())
+                Configuration.Main
+            else
+                Configuration.AuthFlow
+        }
+    }
+
+    private val router: Router<Configuration, Child> = router(
+            initialConfiguration = startDestination,
             handleBackButton = true,
             childFactory = ::createChild
         )
@@ -37,54 +44,27 @@ class FeliaRootComponent internal constructor(
         componentContext: ComponentContext
     ): Child =
         when (configuration) {
-            is Configuration.Start -> Child.Start(
-                FeliaStartComponent(
-                    onCreateWallet = { router.push(Configuration.CreateWallet) },
-                    onImportWallet = { router.push(Configuration.ImportWallet) }
-                )
-            )
-            is Configuration.Main ->
+            is Configuration.Main -> {
                 Child.Main(FeliaMainComponent())
-            Configuration.CreateWallet ->
-                Child.Create(CreateWalletComponent(::onCreateWalletOutput))
-            Configuration.ImportWallet ->
-                Child.Import(
-                    ImportWalletComponent(
-                        componentContext,
-                        storeFactory = storeFactory,
-                        ::onImportWalletOutput
-                    )
-                )
+            }
+            Configuration.AuthFlow -> {
+                val authFlowComponent by inject<AuthFlow> {
+                    parametersOf(componentContext, ::navigateToMain)
+                }
+
+                Child.Auth(authFlowComponent)
+            }
         }
 
-    private fun onCreateWalletOutput(output: CreateWallet.Output) {
-        when (output) {
-            CreateWallet.Output.Closed -> router.pop()
-        }
-    }
-
-    private fun onImportWalletOutput(output: ImportWallet.Output) {
-        when (output) {
-            ImportWallet.Output.Closed -> router.pop()
-        }
+    private fun navigateToMain() {
+        router.push(Configuration.Main)
     }
 
     private sealed class Configuration : Parcelable {
         @Parcelize
-        object Start : Configuration()
+        object AuthFlow : Configuration()
 
         @Parcelize
-        object ImportWallet : Configuration()
-
-        @Parcelize
-        object CreateWallet : Configuration()
-
-        @Parcelize
-        data class Main(val itemId: Long) : Configuration()
-    }
-
-    sealed interface DeepLink {
-        object None : DeepLink
-        class Web(val path: String) : DeepLink
+        object Main : Configuration()
     }
 }

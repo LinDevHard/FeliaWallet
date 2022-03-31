@@ -1,7 +1,10 @@
 package com.lindevhard.felia
 
 import android.app.Application
+import com.gexabyte.android.wallet.core.di.walletCoreModule
+import com.lindevhard.felia.component.root.di.featureModules
 import com.lindevhard.felia.component.root.di.rootModule
+import com.lindevhard.felia.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,7 +24,9 @@ class FeliaApp : Application() {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@FeliaApp)
 
-            modules(rootModule)
+            modules(appModule)
+            modules(walletCoreModule)
+            modules(rootModule + featureModules)
         }
 
         if (BuildConfig.DEBUG) {

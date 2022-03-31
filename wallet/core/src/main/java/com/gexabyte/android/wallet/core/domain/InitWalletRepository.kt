@@ -17,4 +17,6 @@ interface InitWalletRepository {
     fun validateMnemonic(mnemonic: String): Boolean
 
     suspend fun loadWalletMnemonic(): String
+
+    suspend fun isWalletSaved(): Boolean
 }

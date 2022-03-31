@@ -30,7 +30,7 @@ import com.lindevhard.felia.ui.theme.mainText
 @Composable
 fun FeliaAlertDialog(
     title: String,
-    subtitle: String,
+    subtitle: String? = null,
     onDismissRequest: () -> Unit,
     image: Painter = painterResource(id = R.drawable.ic_alert),
     buttonsContent: @Composable () -> Unit = {}
@@ -65,17 +65,21 @@ fun FeliaAlertDialog(
                         .padding(vertical = 16.dp)
                 )
 
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.mainText.copy(alpha = 0.42f),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                )
+                if (subtitle != null) {
+                    Text(
+                        text = subtitle,
+                        style = MaterialTheme.typography.body2,
+                        color = MaterialTheme.colors.mainText.copy(alpha = 0.42f),
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                    )
 
-                Spacer(modifier = Modifier.height(36.dp))
+                    Spacer(modifier = Modifier.height(36.dp))
+                } else {
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
 
                 buttonsContent()
             }

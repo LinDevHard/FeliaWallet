@@ -50,12 +50,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-    private fun feliaRoot(componentContext: ComponentContext): FeliaRoot =
-        FeliaRootComponent(
-            componentContext = componentContext,
-            storeFactory = DefaultStoreFactory(),
-        )
 }
 
 @Composable

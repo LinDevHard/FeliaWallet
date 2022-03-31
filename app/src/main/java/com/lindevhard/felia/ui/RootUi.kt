@@ -22,9 +22,7 @@ fun RootUi(root: FeliaRoot) {
         Children(root.routerState, animation = slide()) {
             when (val child = it.instance) {
                 is Child.Main -> MainUi(child.component)
-                is Child.Start -> StartUi(child.component)
-                is Child.Create -> CreateWalletUi(child.component)
-                is Child.Import -> ImportWalletUi(child.component)
+                is Child.Auth -> AuthFlowUi(child.component)
             }
         }
     }

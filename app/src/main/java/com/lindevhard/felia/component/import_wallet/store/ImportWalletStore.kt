@@ -15,7 +15,8 @@ interface ImportWalletStore: Store<Intent, State, Label> {
 
     data class State(
         val seed: String = "",
-        val isCorrect: Boolean = false
+        val isError: Boolean = false,
+        val isImported: Boolean = false,
     )
 
     sealed class Label {

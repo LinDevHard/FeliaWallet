@@ -6,7 +6,8 @@ val stateToModel: (ImportWalletStore.State) -> ImportWallet.Model =
     {
         ImportWallet.Model(
             seed = it.seed,
-            isEnable = it.isCorrect
+            isImported = it.isImported,
+            isError = it.isError
         )
     }
 

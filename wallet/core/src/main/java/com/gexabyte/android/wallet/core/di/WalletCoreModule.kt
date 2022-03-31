@@ -11,6 +11,7 @@ import com.gexabyte.android.wallet.core.data.datastore.WalletSerializer
 import com.gexabyte.android.wallet.core.domain.HDWalletRepository
 import com.gexabyte.android.wallet.core.domain.InitWalletRepository
 import com.gexabyte.android.wallet.core.domain.MemoryStorage
+import com.gexabyte.android.wallet.core.domain.WalletStorage
 import com.google.crypto.tink.Aead
 import com.google.crypto.tink.aead.AeadConfig
 import com.google.crypto.tink.aead.AesGcmKeyManager
@@ -30,6 +31,7 @@ val walletCoreModule = module {
     single { provideHDWallet(get(), get()) }
     single<InitWalletRepository> { CreateWalletRepositoryImpl(get(named("wallet_store")), get()) }
     single<HDWalletRepository> { HDWalletRepositoryImpl(get()) }
+    single { WalletStorage }
 }
 
 fun provideHDWallet(repo: InitWalletRepository, storage: MemoryStorage): HDWallet {

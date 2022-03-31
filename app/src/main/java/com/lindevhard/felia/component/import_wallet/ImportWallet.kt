@@ -16,13 +16,17 @@ interface ImportWallet {
 
     fun onImportWalletClicked()
 
+    fun onCompleteImport()
+
     data class Model(
         val seed: String,
-        val isEnable: Boolean,
+        val isError: Boolean,
+        val isImported: Boolean,
     )
 
     sealed class Output {
         object Closed: Output()
+        object Imported: Output()
     }
 
     sealed class Event {

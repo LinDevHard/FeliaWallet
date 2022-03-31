@@ -13,9 +13,7 @@ private val DarkColorPalette = darkColors(
     onBackground = mainTextDark,
     onError = mainTextDark,
     error = Color.Red,
-    surface = backgroundDark,
-    onSurface = mainTextDark,
-
+    surface = formsDark,
 )
 
 
