@@ -1,0 +1,106 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "fe182dc0e84a02dd16a767ee934a4416",
+    "entities": [
+      {
+        "tableName": "coin_market_data",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`coinMarketId` INTEGER NOT NULL, `symbol` TEXT NOT NULL, `name` TEXT NOT NULL, `price` REAL NOT NULL, `volume_24h` REAL NOT NULL, `percent_change_1h` REAL NOT NULL, `percent_change_24h` REAL NOT NULL, `percent_change_7d` REAL NOT NULL, `percent_change_30d` REAL NOT NULL, `percent_change_60d` REAL NOT NULL, `percent_change_90d` REAL NOT NULL, `market_cap` REAL NOT NULL, `last_updated` TEXT NOT NULL, PRIMARY KEY(`coinMarketId`))",
+        "fields": [
+          {
+            "fieldPath": "coinMarketId",
+            "columnName": "coinMarketId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "symbol",
+            "columnName": "symbol",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "volume24h",
+            "columnName": "volume_24h",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "percentChange1h",
+            "columnName": "percent_change_1h",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "percentChange24h",
+            "columnName": "percent_change_24h",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "percentChange7d",
+            "columnName": "percent_change_7d",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "percentChange30d",
+            "columnName": "percent_change_30d",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "percentChange60d",
+            "columnName": "percent_change_60d",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "percentChange90d",
+            "columnName": "percent_change_90d",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "marketCap",
+            "columnName": "market_cap",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdateString",
+            "columnName": "last_updated",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "coinMarketId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fe182dc0e84a02dd16a767ee934a4416')"
+    ]
+  }
+}
