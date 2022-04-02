@@ -15,4 +15,5 @@ internal data class CryptoAssetEntity(
     val explorer: String,
     val network: Int,
     val logo: String,
+    val contractAddress: String? = null,
 )

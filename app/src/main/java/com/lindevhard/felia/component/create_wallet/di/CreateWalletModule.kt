@@ -11,7 +11,8 @@ val createWalletModule = module {
             componentContext = componentContext,
             storeFactory = get(),
             walletRepository = get(),
-            output = output
+            createWalletUseCase = get(),
+            output = output,
         )
     }
 }

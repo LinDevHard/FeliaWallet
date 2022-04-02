@@ -4,6 +4,7 @@ import android.app.Application
 import com.gexabyte.android.wallet.core.di.walletCoreModule
 import com.lindevhard.felia.component.root.di.featureModules
 import com.lindevhard.felia.component.root.di.rootModule
+import com.lindevhard.felia.component.root.di.walletModules
 import com.lindevhard.felia.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -25,7 +26,7 @@ class FeliaApp : Application() {
             androidContext(this@FeliaApp)
 
             modules(appModule)
-            modules(walletCoreModule)
+            modules(walletModules)
             modules(rootModule + featureModules)
         }
 

@@ -31,5 +31,7 @@ include (
     ":wallet:core",
     ":wallet:assets",
     ":wallet:rates",
-    ":wallet:ethereum"
+    ":wallet:ethereum",
+    ":wallet:main",
 )
+include(":utils")

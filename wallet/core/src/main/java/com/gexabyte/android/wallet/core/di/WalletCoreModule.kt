@@ -30,7 +30,7 @@ val walletCoreModule = module {
     single(named("wallet_store")) { provideWalletDataStore(get(), get()) }
     single { provideHDWallet(get(), get()) }
     single<InitWalletRepository> { CreateWalletRepositoryImpl(get(named("wallet_store")), get()) }
-    single<HDWalletRepository> { HDWalletRepositoryImpl(get()) }
+    factory <HDWalletRepository> { HDWalletRepositoryImpl(get()) }
     single { WalletStorage }
 }
 

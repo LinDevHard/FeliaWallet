@@ -9,11 +9,13 @@ import com.gexabyte.android.wallet.core.domain.InitWalletRepository
 import com.lindevhard.felia.component.import_wallet.store.ImportWalletStore.Intent
 import com.lindevhard.felia.component.import_wallet.store.ImportWalletStore.Label
 import com.lindevhard.felia.component.import_wallet.store.ImportWalletStore.State
+import com.lindevhard.felia.wallet.main.domain.usecase.CreateWalletUseCase
 import kotlinx.coroutines.launch
 
 class ImportWalletStoreProvider(
     private val storeFactory: StoreFactory,
     private val repository: InitWalletRepository,
+    private val createWalletUseCase: CreateWalletUseCase,
 ) {
 
     fun provide(): ImportWalletStore =
@@ -50,6 +52,7 @@ class ImportWalletStoreProvider(
                 if (repository.validateMnemonic(state.seed)) {
                     val wallet = repository.initWalletFromMnemonicPhrase(state.seed)
                     repository.saveWallet(mnemonic = wallet.mnemonic())
+                    createWalletUseCase(wallet)
                     dispatch(Result.SuccessImport)
                 } else {
                     dispatch(Result.WrongSeed)

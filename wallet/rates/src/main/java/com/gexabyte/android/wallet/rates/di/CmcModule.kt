@@ -46,7 +46,7 @@ private fun getCoinMarketCapNetworkClient(): OkHttpClient {
             val newRequest = request.newBuilder()
                 .addHeader(
                     "X-CMC_PRO_API_KEY",
-                    "69bed206-1375-4b50-bdac-94eef2bd428f"
+                    "cc3ffa3e-a0e4-4b4e-96b8-920371cecc5f"
                 )
             chain.proceed(newRequest.build())
         }

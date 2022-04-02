@@ -85,6 +85,7 @@ dependencies {
     implementation(project(":wallet:assets"))
     implementation(project(":wallet:rates"))
     implementation(project(":wallet:ethereum"))
+    implementation(project(":wallet:main"))
 
     // Core Functionality
     with(Dependencies.Android) {

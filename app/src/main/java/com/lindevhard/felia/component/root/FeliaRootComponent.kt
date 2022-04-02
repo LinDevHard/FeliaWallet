@@ -3,7 +3,6 @@ package com.lindevhard.felia.component.root
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.RouterState
-import com.arkivanov.decompose.router.push
 import com.arkivanov.decompose.router.replaceCurrent
 import com.arkivanov.decompose.router.router
 import com.arkivanov.decompose.value.Value
@@ -46,7 +45,7 @@ class FeliaRootComponent internal constructor(
     ): Child =
         when (configuration) {
             is Configuration.Main -> {
-                Child.Main(FeliaMainComponent())
+                Child.Main(FeliaMainComponent(componentContext))
             }
             Configuration.AuthFlow -> {
                 val authFlowComponent by inject<AuthFlow> {

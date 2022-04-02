@@ -10,6 +10,7 @@ interface EthereumTransferRepository {
 
     fun transferTokens(
         toAddress: String,
+        tokenAddress: String,
         amount: BigDecimal,
         symbol: String
     ): Flow<TransactionReceipt>

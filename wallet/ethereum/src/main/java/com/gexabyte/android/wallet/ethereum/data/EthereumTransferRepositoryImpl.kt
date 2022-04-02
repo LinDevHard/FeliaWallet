@@ -24,7 +24,6 @@ import java.math.BigInteger
 class EthereumTransferRepositoryImpl(
     private val web3: Web3j,
     private val hdWalletRepository: HDWalletRepository,
-    private val erc20AddressProvider: ERC20AddressProvider,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : EthereumTransferRepository {
 
@@ -49,10 +48,10 @@ class EthereumTransferRepositoryImpl(
 
     override fun transferTokens(
         toAddress: String,
+        tokenAddress: String,
         amount: BigDecimal,
         symbol: String
     ): Flow<TransactionReceipt> {
-        val tokenAddress = erc20AddressProvider.getAddressBySymbol(symbol)
         val privateKey = hdWalletRepository.getPrivateKey(CoinType.ETHEREUM)
 
         val contract = ERC20Contract.load(
@@ -76,7 +75,7 @@ class EthereumTransferRepositoryImpl(
         return RawTransactionManager(
             web3,
             Credentials.create(privateKey),
-            ChainIdLong.RINKEBY,
+            ChainIdLong.KOVAN,
         )
     }
 }

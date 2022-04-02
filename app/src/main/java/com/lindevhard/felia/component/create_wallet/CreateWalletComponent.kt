@@ -10,11 +10,13 @@ import com.lindevhard.felia.component.create_wallet.CreateWallet.Model
 import com.lindevhard.felia.component.create_wallet.store.CreateWalletStore
 import com.lindevhard.felia.component.create_wallet.store.CreateWalletStoreProvider
 import com.lindevhard.felia.utils.asValue
+import com.lindevhard.felia.wallet.main.domain.usecase.CreateWalletUseCase
 
 class CreateWalletComponent(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
     walletRepository: InitWalletRepository,
+    createWalletUseCase: CreateWalletUseCase,
     private val output: (CreateWallet.Output) -> Unit
 ) : CreateWallet, ComponentContext by componentContext {
 
@@ -23,6 +25,7 @@ class CreateWalletComponent(
             CreateWalletStoreProvider(
                 storeFactory = storeFactory,
                 repository = walletRepository,
+                createWalletUseCase = createWalletUseCase,
             ).provide()
         }
 

@@ -10,6 +10,7 @@ import com.gexabyte.android.wallet.core.domain.InitWalletRepository
 import com.lindevhard.felia.component.import_wallet.store.ImportWalletStore
 import com.lindevhard.felia.component.import_wallet.store.ImportWalletStoreProvider
 import com.lindevhard.felia.utils.asValue
+import com.lindevhard.felia.wallet.main.domain.usecase.CreateWalletUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -17,6 +18,7 @@ class ImportWalletComponent(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
     walletRepository: InitWalletRepository,
+    createWalletUseCase: CreateWalletUseCase,
     private val output: (ImportWallet.Output) -> Unit
 ) : ImportWallet, ComponentContext by componentContext{
 
@@ -25,6 +27,7 @@ class ImportWalletComponent(
             ImportWalletStoreProvider(
                 storeFactory = storeFactory,
                 repository = walletRepository,
+                createWalletUseCase = createWalletUseCase,
             ).provide()
         }
 

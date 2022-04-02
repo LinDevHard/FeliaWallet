@@ -3,17 +3,15 @@ package com.gexabyte.android.wallet.assets.impl
 import android.content.res.AssetManager
 import android.util.Log
 import com.gexabyte.android.wallet.assets.AssetsRepository
-import com.gexabyte.android.wallet.assets.CryptoAssetDTO
+import com.gexabyte.android.wallet.assets.CryptoAsset
 import com.gexabyte.android.wallet.assets.database.dao.AssetsVersionDao
 import com.gexabyte.android.wallet.assets.database.dao.CryptoAssetsDao
 import com.gexabyte.android.wallet.assets.database.entity.AssetsVersionEntity
 import com.gexabyte.android.wallet.assets.mapper.toCryptoAssetsEntity
-import com.gexabyte.android.wallet.assets.mapper.toDTO
+import com.gexabyte.android.wallet.assets.mapper.toModel
 import com.gexabyte.android.wallet.assets.models.StaticAssetsModel
 import com.google.gson.GsonBuilder
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 internal class AssetsRepositoryImpl(
@@ -46,7 +44,7 @@ internal class AssetsRepositoryImpl(
         }
     }
 
-    override suspend fun getAsset(symbol: String, coinType: Int?): CryptoAssetDTO {
+    override suspend fun getAsset(symbol: String, coinType: Int?): CryptoAsset {
         val asset = if(coinType != null) {
             assetsDao.getAssetBySymbolAndCoinType(symbol, coinType)
         } else {
@@ -54,7 +52,11 @@ internal class AssetsRepositoryImpl(
         }
 
         Log.d("DEBUG", "$symbol, $coinType")
-        return requireNotNull(asset).toDTO()
+        return requireNotNull(asset).toModel()
+    }
+
+    override suspend fun getAssetList(): List<CryptoAsset> {
+       return assetsDao.getAssetList().map { it.toModel() }
     }
 
     companion object {

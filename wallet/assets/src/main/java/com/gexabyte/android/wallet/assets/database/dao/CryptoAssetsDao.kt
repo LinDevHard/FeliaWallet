@@ -12,6 +12,9 @@ internal interface CryptoAssetsDao {
     @Query("SELECT * FROM assets WHERE symbol= :symbol AND network = :coinType")
     suspend fun getAssetBySymbolAndCoinType(symbol: String, coinType: Int): CryptoAssetEntity?
 
+    @Query("SELECT * FROM assets")
+    suspend fun getAssetList(): List<CryptoAssetEntity>
+
     @Query("SELECT * FROM assets WHERE symbol= :symbol LIMIT 1")
     suspend fun getAssetBySymbol(symbol: String): CryptoAssetEntity?
 

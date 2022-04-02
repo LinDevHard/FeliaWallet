@@ -8,11 +8,13 @@ import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.gexabyte.android.wallet.core.domain.InitWalletRepository
 import com.lindevhard.felia.component.create_wallet.store.CreateWalletStore.Intent
 import com.lindevhard.felia.component.create_wallet.store.CreateWalletStore.State
+import com.lindevhard.felia.wallet.main.domain.usecase.CreateWalletUseCase
 import kotlinx.coroutines.launch
 
 class CreateWalletStoreProvider(
     private val storeFactory: StoreFactory,
     private val repository: InitWalletRepository,
+    private val createWalletUseCase: CreateWalletUseCase,
 ) {
 
     fun provide(): CreateWalletStore =
@@ -51,6 +53,8 @@ class CreateWalletStoreProvider(
         private fun initWallet(state: State) {
             scope.launch {
                 repository.saveWallet(mnemonic = state.seed)
+                val wallet = repository.initWalletFromMnemonicPhrase(state.seed)
+                createWalletUseCase(wallet)
                 dispatch(Message.SuccessCreated)
             }
         }

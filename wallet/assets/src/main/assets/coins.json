@@ -1,18 +1,7 @@
 {
-  "version": 1,
+  "version": 2,
   "meta": "Static crypto assets for local usage",
   "assets": [
-    {
-      "name": "Bitcoin",
-      "website": "https://bitcoin.org",
-      "description": "Bitcoin is a cryptocurrency and worldwide payment system. It is the first decentralized digital currency, as the system works without a central bank or single administrator.",
-      "symbol": "BTC",
-      "type": "COIN",
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/bitcoin/info/logo.png",
-      "network": "bitcoin",
-      "explorer": "https://blockchain.info",
-      "decimals": 8
-    },
     {
       "name": "Ethereum",
       "website": "https://ethereum.org/",
@@ -22,62 +11,8 @@
       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/info/logo.png",
       "network": "ethereum",
       "type": "COIN",
-      "decimals": 18
-    },
-    {
-      "name": "TRON",
-      "website": "https://tron.network/",
-      "explorer": "https://tronscan.io/#/",
-      "description": "TRON is dedicated to building the infrastructure for a truly decentralized Internet.",
-      "symbol": "TRX",
-      "type": "COIN",
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/tron/info/logo.png",
-      "network": "tron",
-      "decimals": 6
-    },
-    {
-      "name": "BNB coin",
-      "website": "https://binance.org/",
-      "explorer": "https://explorer.binance.org/",
-      "symbol": "BNB",
-      "type": "COIN",
-      "description": "Fast and secure decentralized digital asset exchange. The new crypto currency trading standard is here.",
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/binance/info/logo.png",
-      "network": "binance",
-      "decimals": 8
-    },
-    {
-      "name": "Stellar",
-      "website": "https://stellar.org",
-      "description": "Stellar is an open platform for building financial products. It enables near instant payments, with almost zero fees, and a smart contract platform to create digital asset economy.",
-      "explorer": "https://dashboard.stellar.org/",
-      "symbol": "XLM",
-      "type": "COIN",
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/stellar/info/logo.png",
-      "network": "stellar",
-      "decimals": 7
-    },
-    {
-      "name": "Polkadot",
-      "website": "https://polkadot.network",
-      "explorer": "http://polkascan.io",
-      "description": "Polkadot is a blockchain project that aims to connect blockchains, to enable the transfer of value and logic across chains. DOT is the native coin of the network.",
-      "symbol": "DOT",
-      "type": "COIN",
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polkadot/info/logo.png",
-      "network": "polkadot",
-      "decimals": 10
-    },
-    {
-      "name": "Cardano",
-      "website": "https://cardano.org",
-      "description": "Cardano (ADA) is a decentralized platform that will allow complex programmable transfers of value in a secure and scalable fashion. Cardano is built in the secure Haskell programming language.",
-      "explorer": "https://cardanoexplorer.com/",
-      "symbol": "ADA",
-      "type": "COIN",
-      "network": "cardano",
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cardano/info/logo.png",
-      "decimals": 6
+      "decimals": 18,
+      "contractAddress": null
     },
     {
       "name": "Tether",
@@ -88,7 +23,8 @@
       "type": "ERC20",
       "network": "ethereum",
       "decimals": 6,
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png",
+      "contractAddress": "0x07de306FF27a2B630B1141956844eB1552B956B5"
     }
   ]
 }

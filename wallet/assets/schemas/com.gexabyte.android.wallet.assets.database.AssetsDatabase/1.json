@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e569b7a032669d2c28b53d3ca1c8d0f4",
+    "identityHash": "f237e7712b10ecfa8004f61d6f30d2af",
     "entities": [
       {
         "tableName": "assets_version",
@@ -32,7 +32,7 @@
       },
       {
         "tableName": "assets",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `symbol` TEXT NOT NULL, `description` TEXT NOT NULL, `decimals` INTEGER NOT NULL, `website` TEXT NOT NULL, `type` TEXT NOT NULL, `explorer` TEXT NOT NULL, `network` INTEGER NOT NULL, `logo` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `symbol` TEXT NOT NULL, `description` TEXT NOT NULL, `decimals` INTEGER NOT NULL, `website` TEXT NOT NULL, `type` TEXT NOT NULL, `explorer` TEXT NOT NULL, `network` INTEGER NOT NULL, `logo` TEXT NOT NULL, `contractAddress` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -93,6 +93,12 @@
             "columnName": "logo",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "contractAddress",
+            "columnName": "contractAddress",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -108,7 +114,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e569b7a032669d2c28b53d3ca1c8d0f4')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f237e7712b10ecfa8004f61d6f30d2af')"
     ]
   }
 }

@@ -29,5 +29,7 @@ internal data class Asset(
     @SerializedName("type")
     val type: String,
     @SerializedName("website")
-    val website: String
+    val website: String,
+    @SerializedName("contractAddress")
+    val contractAddress: String?
 )

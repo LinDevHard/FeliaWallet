@@ -1,6 +1,6 @@
 package com.gexabyte.android.wallet.rates.data
 
-import com.gexabyte.android.wallet.rates.CoinMarketDataDTO
+import com.gexabyte.android.wallet.rates.CoinMarketData
 import com.gexabyte.android.wallet.rates.RatesRepository
 import com.gexabyte.android.wallet.rates.database.dao.CmcDao
 import com.gexabyte.android.wallet.rates.mapper.toCoinMarketDTO
@@ -19,7 +19,7 @@ internal class RatesRepositoryImpl(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): RatesRepository {
 
-    override fun flowOnAllCmcPrice(): Flow<List<CoinMarketDataDTO>> =
+    override fun flowOnAllCmcPrice(): Flow<List<CoinMarketData>> =
         cmcDao
             .observeCmc()
             .map { list ->
@@ -28,14 +28,14 @@ internal class RatesRepositoryImpl(
                 }
             }.flowOn(ioDispatcher)
 
-    override fun flowOnCmcPrice(symbol: String): Flow<CoinMarketDataDTO> =
+    override fun flowOnCmcPrice(symbol: String): Flow<CoinMarketData> =
         cmcDao.observeCmcBySymbol(symbol)
             .map {
                 it.toCoinMarketDTO()
             }
             .flowOn(ioDispatcher)
 
-    override suspend fun getCmcPrice(symbol: String): CoinMarketDataDTO? {
+    override suspend fun getCmcPrice(symbol: String): CoinMarketData? {
         return withContext(ioDispatcher) {
             cmcDao.getCmcBySymbol(symbol)?.toCoinMarketDTO()
         }

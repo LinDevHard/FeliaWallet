@@ -5,6 +5,7 @@ package com.gexabyte.android.wallet.assets
  */
 interface AssetsRepository {
 
-    suspend fun getAsset(symbol: String, coinType: Int? = null): CryptoAssetDTO
+    suspend fun getAsset(symbol: String, coinType: Int? = null): CryptoAsset
 
+    suspend fun getAssetList(): List<CryptoAsset>
 }

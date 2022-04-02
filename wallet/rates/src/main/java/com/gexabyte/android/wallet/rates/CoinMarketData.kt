@@ -1,6 +1,6 @@
 package com.gexabyte.android.wallet.rates
 
-data class CoinMarketDataDTO(
+data class CoinMarketData(
     val id: Long,
     val symbol: String,
     val name: String,

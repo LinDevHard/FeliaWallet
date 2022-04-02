@@ -1,6 +1,6 @@
 package com.gexabyte.android.wallet.rates.mapper
 
-import com.gexabyte.android.wallet.rates.CoinMarketDataDTO
+import com.gexabyte.android.wallet.rates.CoinMarketData
 import com.gexabyte.android.wallet.rates.data.response.ListingData
 import com.gexabyte.android.wallet.rates.database.entity.CoinMarketEntity
 
@@ -20,7 +20,7 @@ internal fun ListingData.toCoinMarketEntity(convert: String) = CoinMarketEntity(
     lastUpdateString = this.quote[convert]!!.lastUpdated
 )
 
-internal fun CoinMarketEntity.toCoinMarketDTO() = CoinMarketDataDTO(
+internal fun CoinMarketEntity.toCoinMarketDTO() = CoinMarketData(
     id = this.coinMarketId,
     symbol = this.symbol,
     name = this.name,
