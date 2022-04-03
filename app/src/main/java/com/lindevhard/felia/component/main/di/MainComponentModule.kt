@@ -12,6 +12,8 @@ val mainComponentModule = module {
             walletRepository = get(),
             storeFactory = get(),
             ratesRepository = get(),
+            updateWalletBalanceUseCase = get(),
+            logoutUseCase = get(),
             onWalletExit = onWalletExit
         )
     }

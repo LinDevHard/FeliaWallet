@@ -11,6 +11,8 @@ import com.lindevhard.felia.component.main.store.WalletMainStore.Label
 import com.lindevhard.felia.component.main.store.WalletMainStore.State
 import com.lindevhard.felia.wallet.main.domain.WalletRepository
 import com.lindevhard.felia.wallet.main.domain.model.Wallet
+import com.lindevhard.felia.wallet.main.domain.usecase.LogoutUseCase
+import com.lindevhard.felia.wallet.main.domain.usecase.UpdateWalletBalanceUseCase
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -19,6 +21,8 @@ class WalletMainStoreProvider(
     private val storeFactory: StoreFactory,
     private val repository: WalletRepository,
     private val ratesRepository: RatesRepository,
+    private val updateWalletUseCase: UpdateWalletBalanceUseCase,
+    private val logoutUseCase: LogoutUseCase,
 ) {
 
     fun provide(): WalletMainStore =
@@ -36,17 +40,23 @@ class WalletMainStoreProvider(
 
     private inner class ExecutorImpl : CoroutineExecutor<Intent, Unit, State, Message, Label>() {
         override fun executeAction(action: Unit, getState: () -> State) {
-
             scope.launch {
                 ratesRepository.updateAllCmcData()
+            }
+
+            scope.launch {
+                updateWalletUseCase()
+            }
+
+            scope.launch {
                 observeWallets()
             }
         }
 
         override fun executeIntent(intent: Intent, getState: () -> State) {
             when (intent) {
-                Intent.RefreshWallet -> TODO()
-                is Intent.RefreshWalletById -> TODO()
+                Intent.RefreshWallet -> scope.launch {  updateWalletUseCase() }
+                is Intent.RefreshWalletById -> scope.launch { updateWalletUseCase(intent.walletIds) }
                 Intent.WalletExit -> scope.launch { exitWallet() }
             }
         }
@@ -58,7 +68,7 @@ class WalletMainStoreProvider(
         }
 
         suspend fun exitWallet() {
-            repository.clearWallets()
+            logoutUseCase()
             publish(Label.WalletExited)
         }
     }

@@ -4,12 +4,13 @@ import com.gexabyte.android.wallet.assets.CryptoAsset
 import com.gexabyte.android.wallet.rates.CoinMarketData
 import java.math.BigDecimal
 
-data class WalletDetail(
+data class WalletDetailDomain(
     val id: Long,
     val address: String,
     val name: String,
     val symbol: String,
     val logo: String,
+    val decimals: Long,
     val balance: BigDecimal,
     val fiatBalance: BigDecimal,
     val fiatRate: BigDecimal,

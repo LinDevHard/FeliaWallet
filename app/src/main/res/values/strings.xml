@@ -13,4 +13,11 @@
     <string name="msg_create_wallet_created">New wallet created</string>
     <string name="msg_copy_seed">Copy seed pharase</string>
     <string name="msg_copied">Copied</string>
+    <string name="msg_are_you_sure">Are you sure?</string>
+    <string name="msg_logout">Log out</string>
+    <string name="msg_cancel">Cancel</string>
+    <string name="msg_receive">Receive</string>
+    <string name="msg_send">Send</string>
+    <string name="msg_coin_market_cap">Coin Market Cap</string>
+    <string name="msg_about">About</string>
 </resources>

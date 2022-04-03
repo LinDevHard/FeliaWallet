@@ -3,6 +3,8 @@ package com.lindevhard.felia.component.main
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.RouterState
+import com.arkivanov.decompose.router.pop
+import com.arkivanov.decompose.router.push
 import com.arkivanov.decompose.router.router
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
@@ -12,10 +14,13 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.gexabyte.android.wallet.rates.RatesRepository
 import com.lindevhard.felia.component.main.FeliaMain.Child
 import com.lindevhard.felia.component.main.store.WalletMainStoreProvider
+import com.lindevhard.felia.component.wallet.detail.WalletDetail
 import com.lindevhard.felia.component.wallet.list.WalletList
 import com.lindevhard.felia.component.wallet.receive.WalletReceiveComponent
 import com.lindevhard.felia.component.wallet.send.WalletSendComponent
 import com.lindevhard.felia.wallet.main.domain.WalletRepository
+import com.lindevhard.felia.wallet.main.domain.usecase.LogoutUseCase
+import com.lindevhard.felia.wallet.main.domain.usecase.UpdateWalletBalanceUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -29,6 +34,8 @@ class FeliaMainComponent(
     storeFactory: StoreFactory,
     private val walletRepository: WalletRepository,
     private val ratesRepository: RatesRepository,
+    private val updateWalletBalanceUseCase: UpdateWalletBalanceUseCase,
+    private val logoutUseCase: LogoutUseCase,
     private val onWalletExit: () -> Unit,
 ) : FeliaMain, KoinComponent, ComponentContext by componentContext {
 
@@ -37,7 +44,9 @@ class FeliaMainComponent(
             WalletMainStoreProvider(
                 storeFactory = storeFactory,
                 repository = walletRepository,
-                ratesRepository = ratesRepository
+                ratesRepository = ratesRepository,
+                updateWalletUseCase = updateWalletBalanceUseCase,
+                logoutUseCase = logoutUseCase,
             ).provide()
         }
 
@@ -60,12 +69,37 @@ class FeliaMainComponent(
     ): Child = when (configuration) {
         Configuration.List -> {
             val walletListComponent by inject<WalletList> {
-                parametersOf(componentContext, store)
+                parametersOf(componentContext, store, ::onWalletListOutput)
             }
             Child.List(walletListComponent)
         }
-        Configuration.Receive -> Child.Receive(WalletReceiveComponent())
-        Configuration.Send -> Child.Send(WalletSendComponent())
+        is Configuration.Receive -> Child.Receive(WalletReceiveComponent())
+        is Configuration.Send -> Child.Send(WalletSendComponent())
+        is Configuration.Detail -> {
+            val walletDetailComponent by inject<WalletDetail> {
+                parametersOf(componentContext, configuration.walletId, ::onWalletDetailOutput)
+            }
+
+            Child.Detail(walletDetailComponent)
+        }
+    }
+
+    private fun onWalletListOutput(output: WalletList.Output) {
+        when(output) {
+            is WalletList.Output.OnWalletClicked ->
+                router.push(Configuration.Detail(output.walletId))
+        }
+    }
+
+    private fun onWalletDetailOutput(output: WalletDetail.Output) {
+        when(output) {
+            is WalletDetail.Output.OnReceiveClicked ->
+                router.push(Configuration.Receive(output.walletId))
+            is WalletDetail.Output.OnSendClicked ->
+                router.push(Configuration.Send(output.walletId))
+            WalletDetail.Output.OnBackClicked ->
+                router.pop()
+        }
     }
 
     private sealed class Configuration : Parcelable {
@@ -73,9 +107,12 @@ class FeliaMainComponent(
         object List : Configuration()
 
         @Parcelize
-        object Receive : Configuration()
+        class Receive(val walletId: Long) : Configuration()
 
         @Parcelize
-        object Send : Configuration()
+        class Send(val walletId: Long): Configuration()
+
+        @Parcelize
+        class Detail(val walletId: Long): Configuration()
     }
 }

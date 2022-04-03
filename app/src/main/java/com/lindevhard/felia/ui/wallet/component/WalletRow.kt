@@ -33,7 +33,7 @@ fun WalletRow(
         name = wallet.name,
         symbol = wallet.symbol,
         balance = BalanceUtils.getScaledValueMinimal(wallet.balance, wallet.decimals, 8),
-        fiatBalance = BalanceUtils.getScaledValue(wallet.fiatBalance, wallet.decimals, 2),
+        fiatBalance = "$" +  BalanceUtils.getScaledValue(wallet.fiatBalance, wallet.decimals, 2),
         modifier = modifier
     )
 }

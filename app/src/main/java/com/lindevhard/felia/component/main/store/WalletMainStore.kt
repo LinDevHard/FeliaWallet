@@ -17,7 +17,7 @@ interface WalletMainStore: Store<Intent, State, Label> {
 
     data class State(
         val wallets: List<Wallet> = listOf(),
-        val isLoading: Boolean = false,
+        val isLoading: Boolean = true,
     )
 
     sealed class Label {

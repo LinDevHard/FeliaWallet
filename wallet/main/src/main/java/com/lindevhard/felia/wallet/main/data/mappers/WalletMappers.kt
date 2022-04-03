@@ -5,7 +5,7 @@ import com.gexabyte.android.wallet.rates.CoinMarketData
 import com.lindevhard.felia.wallet.main.database.entity.WalletEntity
 import com.lindevhard.felia.wallet.main.domain.model.CreateWalletRequest
 import com.lindevhard.felia.wallet.main.domain.model.Wallet
-import com.lindevhard.felia.wallet.main.domain.model.WalletDetail
+import com.lindevhard.felia.wallet.main.domain.model.WalletDetailDomain
 import java.math.BigDecimal
 
 fun WalletEntity.mapToWallet(assetData: CryptoAsset, marketData: CoinMarketData?): Wallet {
@@ -24,13 +24,14 @@ fun WalletEntity.mapToWallet(assetData: CryptoAsset, marketData: CoinMarketData?
     )
 }
 
-fun WalletEntity.mapToWalletDetail(assetData: CryptoAsset, marketData: CoinMarketData?): WalletDetail {
-    return WalletDetail(
+fun WalletEntity.mapToWalletDetail(assetData: CryptoAsset, marketData: CoinMarketData?): WalletDetailDomain {
+    return WalletDetailDomain(
         id = this.id,
         address = this.address,
         name = assetData.name,
         symbol = assetData.symbol,
         logo = assetData.logo,
+        decimals = assetData.decimals.toLong(),
         balance = this.balance,
         fiatBalance = this.balance *BigDecimal(marketData?.price ?: 0.0),
         fiatRate = BigDecimal(marketData?.price ?: 0.0),

@@ -13,9 +13,16 @@ import com.lindevhard.felia.wallet.main.domain.WalletRepository
 
 class WalletListComponent(
     componentContext: ComponentContext,
-    walletMainStore: WalletMainStore,
+    private val walletMainStore: WalletMainStore,
+    private val output: (WalletList.Output) -> Unit
 ) : WalletList, ComponentContext by componentContext {
 
     override val models: Value<WalletList.Model> = walletMainStore.asValue().map(stateToModel)
+
+    override fun exitWallet() =
+        walletMainStore.accept(WalletMainStore.Intent.WalletExit)
+
+    override fun onWalletClick(walletId: Long) =
+        output(WalletList.Output.OnWalletClicked(walletId))
 
 }

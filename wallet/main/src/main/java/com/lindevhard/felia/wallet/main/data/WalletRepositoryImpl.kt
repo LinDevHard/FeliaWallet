@@ -9,7 +9,7 @@ import com.lindevhard.felia.wallet.main.database.dao.WalletDao
 import com.lindevhard.felia.wallet.main.domain.WalletRepository
 import com.lindevhard.felia.wallet.main.domain.model.CreateWalletRequest
 import com.lindevhard.felia.wallet.main.domain.model.Wallet
-import com.lindevhard.felia.wallet.main.domain.model.WalletDetail
+import com.lindevhard.felia.wallet.main.domain.model.WalletDetailDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -57,7 +57,7 @@ class WalletRepositoryImpl(
         }.flowOn(Dispatchers.IO)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override suspend fun flowOnWalletDetail(walletId: Long): Flow<WalletDetail> {
+    override suspend fun flowOnWalletDetail(walletId: Long): Flow<WalletDetailDomain> {
         val walletEntity = walletDao.findWalletById(walletId) ?: return flow { }
         val asset = assetsRepository.getAsset(walletEntity.symbol, walletEntity.coinType)
         return combine(
