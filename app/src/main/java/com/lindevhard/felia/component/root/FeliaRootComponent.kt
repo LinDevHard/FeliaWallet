@@ -9,6 +9,7 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.gexabyte.android.wallet.core.domain.InitWalletRepository
 import com.lindevhard.felia.component.auth.AuthFlow
+import com.lindevhard.felia.component.main.FeliaMain
 import com.lindevhard.felia.component.main.FeliaMainComponent
 import com.lindevhard.felia.component.root.FeliaRoot.Child
 import kotlinx.coroutines.runBlocking
@@ -45,7 +46,11 @@ class FeliaRootComponent internal constructor(
     ): Child =
         when (configuration) {
             is Configuration.Main -> {
-                Child.Main(FeliaMainComponent(componentContext))
+                val mainFlowComponent by inject<FeliaMain> {
+                    parametersOf(componentContext, ::navigateToAuth)
+                }
+
+                Child.Main(mainFlowComponent)
             }
             Configuration.AuthFlow -> {
                 val authFlowComponent by inject<AuthFlow> {
@@ -58,6 +63,10 @@ class FeliaRootComponent internal constructor(
 
     private fun navigateToMain() {
         router.replaceCurrent(Configuration.Main)
+    }
+
+    private fun navigateToAuth() {
+        router.replaceCurrent(Configuration.AuthFlow)
     }
 
     private sealed class Configuration : Parcelable {

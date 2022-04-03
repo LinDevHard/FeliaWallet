@@ -7,5 +7,5 @@ interface EthereumBalanceRepository {
 
     fun getEthBalance(address: String): Flow<BigInteger>
 
-    fun getTokenBalance(symbol: String, address: String): Flow<BigInteger>
+    fun getTokenBalance(symbol: String, tokenAddress: String, address: String): Flow<BigInteger>
 }

@@ -5,10 +5,15 @@ import com.arkivanov.decompose.value.Value
 import com.lindevhard.felia.component.wallet.list.WalletList
 import com.lindevhard.felia.component.wallet.receive.WalletReceive
 import com.lindevhard.felia.component.wallet.send.WalletSend
+import kotlinx.coroutines.flow.Flow
 
 interface FeliaMain {
 
     val routerState: Value<RouterState<*, Child>>
+
+    val events: Flow<Event>
+
+    fun exitWallet()
 
     sealed class Child {
         data class List(val component: WalletList) : Child()
@@ -16,4 +21,7 @@ interface FeliaMain {
         data class Send(val component: WalletSend) : Child()
     }
 
+    sealed class Event {
+        object WalletExited: Event()
+    }
 }

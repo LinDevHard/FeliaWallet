@@ -8,6 +8,7 @@ data class Wallet(
     val name: String,
     val symbol: String,
     val logo: String,
+    val decimals: Long,
     val balance: BigDecimal,
     val fiatBalance: BigDecimal,
     val fiatRate: BigDecimal,

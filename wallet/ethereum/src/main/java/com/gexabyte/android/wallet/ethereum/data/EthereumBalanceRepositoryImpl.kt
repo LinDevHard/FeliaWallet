@@ -17,7 +17,6 @@ import java.math.BigInteger
 
 class EthereumBalanceRepositoryImpl(
     private val web3: Web3j,
-    private val erc20AddressProvider: ERC20AddressProvider,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : EthereumBalanceRepository {
 
@@ -34,8 +33,7 @@ class EthereumBalanceRepositoryImpl(
 
     }
 
-    override fun getTokenBalance(symbol: String, address: String): Flow<BigInteger> {
-        val tokenAddress = erc20AddressProvider.getAddressBySymbol(symbol)
+    override fun getTokenBalance(symbol: String, tokenAddress: String, address: String): Flow<BigInteger> {
 
         val contract = ERC20Contract.load(
             tokenAddress,

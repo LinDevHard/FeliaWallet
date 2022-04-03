@@ -17,7 +17,7 @@ internal class RatesRepositoryImpl(
     private val cmcService: CmcService,
     private val cmcDao: CmcDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-): RatesRepository {
+) : RatesRepository {
 
     override fun flowOnAllCmcPrice(): Flow<List<CoinMarketData>> =
         cmcDao
@@ -40,10 +40,11 @@ internal class RatesRepositoryImpl(
             cmcDao.getCmcBySymbol(symbol)?.toCoinMarketDTO()
         }
     }
+
     override suspend fun updateAllCmcData(convertCurrency: String): Result<Unit> {
         return withContext(ioDispatcher) {
             val entities =
-                when(val result = cmcService.getCmcListingData()) {
+                when (val result = cmcService.getCmcListingData()) {
                     is NetworkResponse.Success -> {
                         result.body.data.map { listingData ->
                             listingData.toCoinMarketEntity(convertCurrency)
@@ -57,6 +58,6 @@ internal class RatesRepositoryImpl(
             }
 
             return@withContext Result.success(Unit)
-            }
         }
+    }
 }

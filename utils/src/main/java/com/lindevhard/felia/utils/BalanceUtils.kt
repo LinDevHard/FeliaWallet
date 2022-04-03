@@ -137,7 +137,7 @@ object BalanceUtils {
         return scaledValue(value, pattern, decimals, precision)
     }
 
-    fun getScaledValueMinimal(value: BigInteger?, decimals: Long): String {
+    fun getScaledValueMinimal(value: BigInteger, decimals: Long): String {
         return getScaledValueMinimal(
             BigDecimal(value),
             decimals,
