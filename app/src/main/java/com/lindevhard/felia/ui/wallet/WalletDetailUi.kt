@@ -15,9 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -35,13 +33,13 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.lindevhard.felia.R
-import com.lindevhard.felia.ui.R as CommonUI
 import com.lindevhard.felia.component.wallet.detail.WalletDetail
 import com.lindevhard.felia.ui.components.appbar.AppBarScaffold
 import com.lindevhard.felia.ui.components.button.PrimaryButton
 import com.lindevhard.felia.ui.theme.mainText
 import com.lindevhard.felia.utils.BalanceUtils
 import com.lindevhard.felia.wallet.main.domain.model.WalletDetailDomain
+import com.lindevhard.felia.ui.R as CommonUI
 
 @Composable
 fun WalletDetailUi(component: WalletDetail) {

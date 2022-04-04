@@ -16,7 +16,7 @@ import com.lindevhard.felia.component.main.FeliaMain.Child
 import com.lindevhard.felia.component.main.store.WalletMainStoreProvider
 import com.lindevhard.felia.component.wallet.detail.WalletDetail
 import com.lindevhard.felia.component.wallet.list.WalletList
-import com.lindevhard.felia.component.wallet.receive.WalletReceiveComponent
+import com.lindevhard.felia.component.wallet.receive.WalletReceive
 import com.lindevhard.felia.component.wallet.send.WalletSendComponent
 import com.lindevhard.felia.wallet.main.domain.WalletRepository
 import com.lindevhard.felia.wallet.main.domain.usecase.LogoutUseCase
@@ -73,7 +73,13 @@ class FeliaMainComponent(
             }
             Child.List(walletListComponent)
         }
-        is Configuration.Receive -> Child.Receive(WalletReceiveComponent())
+        is Configuration.Receive ->{
+            val walletReceiveComponent by inject<WalletReceive> {
+                parametersOf(componentContext, configuration.walletId, ::onWalletReceiveOutput)
+            }
+
+            Child.Receive(walletReceiveComponent)
+        }
         is Configuration.Send -> Child.Send(WalletSendComponent())
         is Configuration.Detail -> {
             val walletDetailComponent by inject<WalletDetail> {
@@ -99,6 +105,12 @@ class FeliaMainComponent(
                 router.push(Configuration.Send(output.walletId))
             WalletDetail.Output.OnBackClicked ->
                 router.pop()
+        }
+    }
+
+    private fun onWalletReceiveOutput(output: WalletReceive.Output) {
+        when(output) {
+            WalletReceive.Output.OnBackClicked -> router.pop()
         }
     }
 
