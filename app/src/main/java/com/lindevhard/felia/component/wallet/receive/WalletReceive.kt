@@ -1,6 +1,7 @@
 package com.lindevhard.felia.component.wallet.receive
 
 import com.arkivanov.decompose.value.Value
+import com.lindevhard.felia.wallet.main.domain.model.WalletDetailDomain
 
 interface WalletReceive {
     val models: Value<Model>
@@ -8,9 +9,7 @@ interface WalletReceive {
     fun onBackClicked()
 
     data class Model(
-        val symbol: String ,
-        val name: String ,
-        val address: String,
+        val wallet: WalletDetailDomain? = null,
         val isLoading: Boolean,
     )
 

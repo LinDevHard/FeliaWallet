@@ -88,12 +88,14 @@ dependencies {
     implementation(project(":wallet:main"))
     implementation(project(":utils"))
 
+    implementation ("com.google.guava:guava:29.0-android")
     // Core Functionality
     with(Dependencies.Android) {
         implementation(coreKtx)
         implementation(appCompat)
         implementation(material)
         implementation(lifecycleRuntimeKtx)
+        implementation(futures)
     }
 
     // MVI
@@ -157,6 +159,7 @@ dependencies {
     // Accompanist
     with(Dependencies.Android) {
         implementation(accompanistInsets)
+        implementation(accompanistPermission)
         implementation(flowLayout)
     }
 
@@ -169,6 +172,16 @@ dependencies {
 
     with(Dependencies.Blockchain) {
         implementation(hdWallet)
+    }
+
+    //QR
+    with(Dependencies.Android) {
+        implementation(zxing)
+        implementation(qrCodeGen)
+        implementation(Dependencies.Android.CameraX.core)
+        implementation(Dependencies.Android.CameraX.camera2)
+        implementation(Dependencies.Android.CameraX.view)
+        implementation(Dependencies.Android.CameraX.lifecycle)
     }
 
 }

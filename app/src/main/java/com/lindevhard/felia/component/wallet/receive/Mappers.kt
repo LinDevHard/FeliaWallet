@@ -6,16 +6,12 @@ val stateToModel: (WalletDetailStore.State) -> WalletReceive.Model =
     { state ->
         if(state.walletDetail != null) {
             WalletReceive.Model(
-                symbol = "",
-                name = "",
-                address = "",
+                wallet = state.walletDetail,
                 isLoading = true
             )
         } else {
             WalletReceive.Model(
-                symbol = state.walletDetail?.symbol ?: "",
-                name = state.walletDetail?.name ?: "",
-                address = state.walletDetail?.address ?: "",
+                wallet = state.walletDetail,
                 isLoading = false
             )
         }

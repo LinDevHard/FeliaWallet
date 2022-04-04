@@ -106,6 +106,7 @@ object Dependencies {
         val coreKtx by lazy { "androidx.core:core-ktx:${Versions.coreKtx}" }
         val appCompat by lazy { "androidx.appcompat:appcompat:${Versions.appCompat}" }
         val material by lazy { "com.google.android.material:material:${Versions.material}" }
+        val futures by lazy { "androidx.concurrent:concurrent-futures:1.1.0" }
 
         // Lifecycle components
         val lifecycleRuntimeKtx by lazy { "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleRuntimeKtx}" }
@@ -159,6 +160,7 @@ object Dependencies {
 
         // Accompanist
         val accompanistInsets by lazy { "com.google.accompanist:accompanist-insets:${Versions.accompanist}" }
+        val accompanistPermission by lazy { "com.google.accompanist:accompanist-permissions:${Versions.accompanist}" }
         val accompanistNavigationAnimations by lazy { "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}" }
         val flowLayout by lazy { "com.google.accompanist:accompanist-flowlayout:${Versions.accompanist}" }
 
@@ -170,6 +172,19 @@ object Dependencies {
 
         // gson
         val gson by lazy { "com.google.code.gson:gson:2.9.0" }
+
+        //Qr
+        val zxing by lazy { "com.google.zxing:core:3.3.3" }
+        val qrCodeGen by lazy { "com.github.kenglxn.QRGen:android:2.6.0"}
+
+        object CameraX {
+            private val version by lazy { "1.0.1" }
+
+            val core by lazy { "androidx.camera:camera-core:$version" }
+            val camera2 by lazy { "androidx.camera:camera-camera2:$version" }
+            val lifecycle by lazy { "androidx.camera:camera-lifecycle:$version" }
+            val view by lazy { "androidx.camera:camera-view:1.0.0-alpha28" }
+        }
 
         // Network
         object OkHttp {

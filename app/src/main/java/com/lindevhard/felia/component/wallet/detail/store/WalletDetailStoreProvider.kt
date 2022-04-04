@@ -9,6 +9,7 @@ import com.lindevhard.felia.wallet.main.domain.WalletRepository
 import com.lindevhard.felia.wallet.main.domain.model.WalletDetailDomain
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class WalletDetailStoreProvider(
     private val storeFactory: StoreFactory,
@@ -42,6 +43,7 @@ class WalletDetailStoreProvider(
             walletRepository
                 .flowOnWalletDetail(walletId = walletId)
                 .collectLatest { walletDetail ->
+                    Timber.d("walletDetail: $walletDetail")
                     dispatch(Message.WalletLoaded(walletDetail))
                 }
         }

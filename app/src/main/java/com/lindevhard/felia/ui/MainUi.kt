@@ -7,6 +7,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.animation.child.slid
 import com.lindevhard.felia.component.main.FeliaMain
 import com.lindevhard.felia.ui.wallet.WalletDetailUi
 import com.lindevhard.felia.ui.wallet.WalletListUi
+import com.lindevhard.felia.ui.wallet.WalletReceiveUi
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -39,7 +40,6 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
 
         setContent {
             FeliaTheme {
