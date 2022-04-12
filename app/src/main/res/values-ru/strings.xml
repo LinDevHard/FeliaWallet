@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="msg_enter_create_wallet">Создать новый кошелек</string>
+    <string name="msg_already_have_wallet">Уже есть кошелек</string>
+    <string name="msg_create_wallet">Создать кошелек</string>
+    <string name="msg_import_wallet">Импортировать кошелек</string>
+    <string name="msg_user_import_wallet">Введите сид фразу в правильном порядке разделенной пробелами</string>
+    <string name="msg_user_create_wallet">Запишите или скопируйте эти слова в правльном порядке и сохраните</string>
+    <string name="msg_import_wallet_imported">Кошелек импортирован</string>
+    <string name="msg_ok">Окей</string>
+    <string name="msg_import_wallet_error">Сид фраза неверная. Попробуйте снова</string>
+    <string name="msg_wallet">Кошелек</string>
+    <string name="msg_create_wallet_created">Новый  кошелек создан</string>
+    <string name="msg_copy_seed">Скопировать сид фразу</string>
+    <string name="msg_copied">Скопировано</string>
+    <string name="msg_are_you_sure">Вы уверены ?</string>
+    <string name="msg_logout">Выйти</string>
+    <string name="msg_cancel">Отмена</string>
+    <string name="msg_receive">Получить</string>
+    <string name="msg_send">Отправить</string>
+    <string name="msg_about">Описание</string>
+    <string name="msg_gran_permission">Разрешить разрешение</string>
+    <string name="msg_please_grant_camera_permission_from_settings">Для  сканера QR Code,  разрешите приложению доступ к камере из настроек приложения</string>
+    <string name="msg_please_grant_camera_permission_qr">Для  сканера QR Code,  разрешите доступ к камере</string>
+    <string name="msg_copy_address">Скопировать адрес</string>
+    <string name="msg_share_address">Поделиться адресом</string>
+</resources>
