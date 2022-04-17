@@ -24,4 +24,15 @@
     <string name="msg_please_grant_camera_permission_qr">Для  сканера QR Code,  разрешите доступ к камере</string>
     <string name="msg_copy_address">Скопировать адрес</string>
     <string name="msg_share_address">Поделиться адресом</string>
+    <string name="msg_confirm">Подтвердить</string>
+    <string name="msg_continue">Продолжить</string>
+    <string name="msg_confirm_transaction">Подтвердить транзакцию?</string>
+    <string name="msg_confirm_transaction_desc">После продолжения, траназкция будет отправлена в сеть</string>
+    <string name="msg_to_address">Адрес</string>
+    <string name="msg_address_invalid">Неправильный адрес</string>
+    <string name="msg_amount">Сумма</string>
+    <string name="msg_insufficient_funds">Недостаточно средств</string>
+    <string name="msg_transaction_in_progress">Транзакция в процессе… Пожалуйста, подождите</string>
+    <string name="msg_transaction_success">Успешная транзакция</string>
+    <string name="msg_transaction_failed">Траназкция завершилась ошибкой</string>
 </resources>

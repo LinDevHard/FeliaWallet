@@ -17,6 +17,7 @@ import com.lindevhard.felia.component.root.FeliaRootComponent
 import com.lindevhard.felia.component.wallet.detail.di.walletDetailComponentModule
 import com.lindevhard.felia.component.wallet.list.di.walletListComponentModule
 import com.lindevhard.felia.component.wallet.receive.di.walletReceiveComponentModule
+import com.lindevhard.felia.component.wallet.send.di.walletSendModule
 import com.lindevhard.felia.wallet.main.di.walletMainModule
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
@@ -41,6 +42,7 @@ val featureModules = listOf(
     walletListComponentModule,
     walletDetailComponentModule,
     walletReceiveComponentModule,
+    walletSendModule,
 )
 
 val walletModules = listOf(

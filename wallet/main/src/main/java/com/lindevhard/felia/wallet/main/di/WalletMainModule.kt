@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.lindevhard.felia.wallet.main.data.WalletRepositoryImpl
 import com.lindevhard.felia.wallet.main.database.FeliaDb
-import com.lindevhard.felia.wallet.main.database.convertors.BigDecimalDoubleTypeConverter
 import com.lindevhard.felia.wallet.main.domain.WalletRepository
 import com.lindevhard.felia.wallet.main.domain.usecase.CreateWalletUseCase
 import com.lindevhard.felia.wallet.main.domain.usecase.LogoutUseCase
@@ -17,7 +16,7 @@ val walletMainModule = module {
 
     factory<WalletRepository> { WalletRepositoryImpl(get(), get(), get()) }
 
-    factory { CreateWalletUseCase(get(), get()) }
+    factory { CreateWalletUseCase(get(), get(), get()) }
     factory { UpdateWalletBalanceUseCase(get(), get()) }
     factory { LogoutUseCase(get(), get()) }
 }

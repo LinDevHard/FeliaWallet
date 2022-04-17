@@ -22,10 +22,26 @@ import com.lindevhard.felia.ui.theme.FeliaTheme
 import com.lindevhard.felia.ui.theme.mainText
 import com.lindevhard.felia.utils.BalanceUtils
 import com.lindevhard.felia.wallet.main.domain.model.Wallet
+import com.lindevhard.felia.wallet.main.domain.model.WalletDetailDomain
 
 @Composable
 fun WalletRow(
     wallet: Wallet,
+    modifier: Modifier = Modifier,
+) {
+    WalletRow(
+        logo = wallet.logo,
+        name = wallet.name,
+        symbol = wallet.symbol,
+        balance = BalanceUtils.getScaledValueMinimal(wallet.balance, wallet.decimals, 8),
+        fiatBalance = "$" +  BalanceUtils.getScaledValue(wallet.fiatBalance, wallet.decimals, 2),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun WalletRow(
+    wallet: WalletDetailDomain,
     modifier: Modifier = Modifier,
 ) {
     WalletRow(

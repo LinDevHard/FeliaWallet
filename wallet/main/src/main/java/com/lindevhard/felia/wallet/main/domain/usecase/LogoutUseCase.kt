@@ -1,6 +1,5 @@
 package com.lindevhard.felia.wallet.main.domain.usecase
 
-import com.gexabyte.android.wallet.core.domain.HDWalletRepository
 import com.gexabyte.android.wallet.core.domain.InitWalletRepository
 import com.lindevhard.felia.wallet.main.domain.WalletRepository
 

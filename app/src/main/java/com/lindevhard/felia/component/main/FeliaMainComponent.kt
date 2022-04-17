@@ -4,7 +4,9 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.RouterState
 import com.arkivanov.decompose.router.pop
+import com.arkivanov.decompose.router.popWhile
 import com.arkivanov.decompose.router.push
+import com.arkivanov.decompose.router.replaceCurrent
 import com.arkivanov.decompose.router.router
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
@@ -17,6 +19,7 @@ import com.lindevhard.felia.component.main.store.WalletMainStoreProvider
 import com.lindevhard.felia.component.wallet.detail.WalletDetail
 import com.lindevhard.felia.component.wallet.list.WalletList
 import com.lindevhard.felia.component.wallet.receive.WalletReceive
+import com.lindevhard.felia.component.wallet.send.WalletSend
 import com.lindevhard.felia.component.wallet.send.WalletSendComponent
 import com.lindevhard.felia.wallet.main.domain.WalletRepository
 import com.lindevhard.felia.wallet.main.domain.usecase.LogoutUseCase
@@ -80,13 +83,26 @@ class FeliaMainComponent(
 
             Child.Receive(walletReceiveComponent)
         }
-        is Configuration.Send -> Child.Send(WalletSendComponent())
+        is Configuration.Send -> {
+            val walletSendComponent by inject<WalletSend> {
+                parametersOf(componentContext, configuration.walletId, ::onWalletSendOutput)
+            }
+
+            Child.Send(walletSendComponent)
+        }
         is Configuration.Detail -> {
             val walletDetailComponent by inject<WalletDetail> {
                 parametersOf(componentContext, configuration.walletId, ::onWalletDetailOutput)
             }
 
             Child.Detail(walletDetailComponent)
+        }
+    }
+
+    private fun onWalletSendOutput(output: WalletSend.Output) {
+        when(output) {
+            WalletSend.Output.OnBackClicked -> router.pop()
+            WalletSend.Output.OnSuccessTransaction -> router.pop()
         }
     }
 

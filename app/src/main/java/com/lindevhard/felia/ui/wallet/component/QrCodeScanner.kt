@@ -142,7 +142,7 @@ fun CameraPermissionNotGrantedContent(explanationStringId: Int, onClick: OnClick
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Gray)
+            .background(MaterialTheme.colors.surface)
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -168,7 +168,7 @@ fun CameraPermissionNotAvailableContent(explanationStringId: Int, onClick: OnCli
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Gray)
+            .background(MaterialTheme.colors.surface)
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally

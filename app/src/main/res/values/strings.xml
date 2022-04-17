@@ -25,4 +25,15 @@
     <string name="msg_please_grant_camera_permission_qr">"For QR code scanning, please, grant camera permission "</string>
     <string name="msg_copy_address">Copy address</string>
     <string name="msg_share_address">Share address</string>
+    <string name="msg_confirm">Confirm</string>
+    <string name="msg_continue">Continue</string>
+    <string name="msg_confirm_transaction">Confirm transaction ?</string>
+    <string name="msg_confirm_transaction_desc">After continue click, transaction will be send to network!</string>
+    <string name="msg_to_address">To address</string>
+    <string name="msg_address_invalid">Incorrect address</string>
+    <string name="msg_amount">Amount</string>
+    <string name="msg_insufficient_funds">Insufficient funds</string>
+    <string name="msg_transaction_in_progress">Transaction in progress… Please wait</string>
+    <string name="msg_transaction_success">Success transaction</string>
+    <string name="msg_transaction_failed">Failed transaction</string>
 </resources>

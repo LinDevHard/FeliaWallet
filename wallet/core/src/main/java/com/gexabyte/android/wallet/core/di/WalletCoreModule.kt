@@ -29,9 +29,9 @@ val walletCoreModule = module {
     single(createdAtStart = true) { provideAead(get()) }
     single(named("wallet_store")) { provideWalletDataStore(get(), get()) }
     single { provideHDWallet(get(), get()) }
-    single<InitWalletRepository> { CreateWalletRepositoryImpl(get(named("wallet_store")), get()) }
+    single<InitWalletRepository> { CreateWalletRepositoryImpl(get(named("wallet_store")), get(), get()) }
     factory <HDWalletRepository> { HDWalletRepositoryImpl(get()) }
-    single { WalletStorage }
+    single<MemoryStorage> { WalletStorage }
 }
 
 fun provideHDWallet(repo: InitWalletRepository, storage: MemoryStorage): HDWallet {

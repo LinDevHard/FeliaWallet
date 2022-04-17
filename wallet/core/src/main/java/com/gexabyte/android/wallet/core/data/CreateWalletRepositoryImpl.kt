@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.datastore.core.DataStore
 import com.gexabyte.android.wallet.core.Wallet
 import com.gexabyte.android.wallet.core.domain.InitWalletRepository
+import com.gexabyte.android.wallet.core.domain.MemoryStorage
+import com.gexabyte.android.wallet.core.domain.WalletStorage
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,11 +15,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import wallet.core.jni.HDWallet
+import wallet.core.jni.Mnemonic
 import java.security.InvalidParameterException
 
 internal class CreateWalletRepositoryImpl(
     private val walletDataStore: DataStore<Wallet>,
     private val externalScope: CoroutineScope,
+    private val mnemonicStorage: MemoryStorage,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : InitWalletRepository {
 
@@ -75,9 +79,17 @@ internal class CreateWalletRepositoryImpl(
 
     override suspend fun isWalletSaved(): Boolean {
         return withContext(ioDispatcher) {
-            walletDataStore.data.map { wallet ->
+            val isSaved = walletDataStore.data.map { wallet ->
                 !wallet.seedPhrase.isNullOrEmpty()
             }.first()
+
+            if(isSaved) {
+                mnemonicStorage.mnemonic = walletDataStore.data.map { wallet ->
+                    wallet.seedPhrase ?: ""
+                }.first()
+            }
+
+            isSaved
         }
     }
 }

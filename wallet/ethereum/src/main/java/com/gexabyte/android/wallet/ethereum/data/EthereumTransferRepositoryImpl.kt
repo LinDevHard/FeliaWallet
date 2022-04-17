@@ -1,7 +1,6 @@
 package com.gexabyte.android.wallet.ethereum.data
 
 import com.gexabyte.android.wallet.core.domain.HDWalletRepository
-import com.gexabyte.android.wallet.ethereum.address.ERC20AddressProvider
 import com.gexabyte.android.wallet.ethereum.contract.ERC20Contract
 import com.gexabyte.android.wallet.ethereum.domain.EthereumTransferRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -27,7 +26,6 @@ class EthereumTransferRepositoryImpl(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : EthereumTransferRepository {
 
-
     private val staticGasProvider by lazy {
         StaticGasProvider(BigInteger.valueOf(10000000000), BigInteger.valueOf(900_000))
     }
@@ -40,7 +38,7 @@ class EthereumTransferRepositoryImpl(
             Credentials.create(privateKey),
             toAddress,
             amount,
-            Convert.Unit.WEI
+            Convert.Unit.WEI,
         ).flowable()
             .asFlow()
             .flowOn(ioDispatcher)

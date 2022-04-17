@@ -6,6 +6,7 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.gexabyte.android.wallet.core.domain.InitWalletRepository
+import com.gexabyte.android.wallet.core.domain.WalletStorage
 import com.lindevhard.felia.component.import_wallet.store.ImportWalletStore.Intent
 import com.lindevhard.felia.component.import_wallet.store.ImportWalletStore.Label
 import com.lindevhard.felia.component.import_wallet.store.ImportWalletStore.State
