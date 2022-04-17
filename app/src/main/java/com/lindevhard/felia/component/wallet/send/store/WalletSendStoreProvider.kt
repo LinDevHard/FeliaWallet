@@ -38,7 +38,7 @@ class WalletSendStoreProvider(
 
     private sealed class Message {
         class WalletLoaded(val wallet: WalletDetailDomain) : Message()
-        class UpdateAmount(val amountInput: String, val amount: BigDecimal, val isValid: Boolean) :
+        class UpdateAmount(val amountInput: String, val amount: BigDecimal, val amountFiat: BigDecimal, val isValid: Boolean) :
             Message()
 
         class UpdateAddress(val address: String, val isValid: Boolean) : Message()
@@ -122,17 +122,20 @@ class WalletSendStoreProvider(
                     Message.UpdateAmount(
                         amountInput = amountText,
                         amount = BigDecimal.ZERO,
-                        isValid = true
+                        amountFiat = BigDecimal.ZERO,
+                        isValid = true,
                     )
                 )
             } else {
                 val amount = BigDecimal(amountText) * BigDecimal.TEN.pow(wallet.decimals.toInt())
+                val amountFiat = BigDecimal(amountText) * wallet.fiatRate
                 val amountIsValid = wallet.balance > amount
 
                 dispatch(
                     Message.UpdateAmount(
                         amountInput = amountText,
                         amount = amount,
+                        amountFiat = amountFiat,
                         isValid = amountIsValid
                     )
                 )
@@ -159,6 +162,7 @@ class WalletSendStoreProvider(
                 )
                 is Message.UpdateAmount -> copy(
                     amount = msg.amount,
+                    amountFiat = msg.amountFiat,
                     amountInput = msg.amountInput,
                     amountIsValid = msg.isValid
                 )

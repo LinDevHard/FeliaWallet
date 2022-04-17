@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterialApi::class)
 
-package com.lindevhard.felia.ui
+package com.lindevhard.felia.ui.wallet
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,8 +41,10 @@ import com.lindevhard.felia.ui.components.button.PrimaryButton
 import com.lindevhard.felia.ui.components.dialog.AlertDialogButtonsRow
 import com.lindevhard.felia.ui.components.dialog.FeliaAlertDialog
 import com.lindevhard.felia.ui.theme.mainText
+import com.lindevhard.felia.ui.theme.secondaryText
 import com.lindevhard.felia.ui.wallet.component.QrScreen
 import com.lindevhard.felia.ui.wallet.component.WalletRow
+import com.lindevhard.felia.utils.BalanceUtils
 import com.lindevhard.felia.utils.toast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -209,6 +211,16 @@ fun WalletSendUiMain(
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 8.dp)
                     .fillMaxWidth()
+            )
+
+            Text(
+                text = "≈ $${BalanceUtils.getScaledValue(state.amountFiat, 0, 2)}",
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Start,
+                color = MaterialTheme.colors.secondaryText,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
             )
 
             if (!state.amountIsValid) {

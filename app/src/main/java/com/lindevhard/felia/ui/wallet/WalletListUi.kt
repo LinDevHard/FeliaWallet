@@ -32,7 +32,6 @@ fun WalletListUi(component: WalletList) {
 
     var isShowExitDialog by remember { mutableStateOf(false) }
 
-
     if (isShowExitDialog) {
         FeliaAlertDialog(
             title = stringResource(id = R.string.msg_are_you_sure),

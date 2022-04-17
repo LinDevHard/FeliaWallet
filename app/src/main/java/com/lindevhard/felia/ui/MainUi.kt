@@ -8,6 +8,7 @@ import com.lindevhard.felia.component.main.FeliaMain
 import com.lindevhard.felia.ui.wallet.WalletDetailUi
 import com.lindevhard.felia.ui.wallet.WalletListUi
 import com.lindevhard.felia.ui.wallet.WalletReceiveUi
+import com.lindevhard.felia.ui.wallet.WalletSendUi
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable

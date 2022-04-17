@@ -25,6 +25,7 @@ interface WalletSendStore: Store<Intent, State, Label> {
         val amountInput: String = "",
         val amountIsValid: Boolean = true,
         val amount: BigDecimal = BigDecimal.ZERO,
+        val amountFiat: BigDecimal = BigDecimal.ZERO,
         val isLoading: Boolean = false,
         val isShowConfirmDialog: Boolean = false,
     )

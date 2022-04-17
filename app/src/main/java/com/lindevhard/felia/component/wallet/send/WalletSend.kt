@@ -4,6 +4,7 @@ import com.arkivanov.decompose.value.Value
 import com.lindevhard.felia.wallet.main.domain.model.Wallet
 import com.lindevhard.felia.wallet.main.domain.model.WalletDetailDomain
 import kotlinx.coroutines.flow.Flow
+import java.math.BigDecimal
 
 interface WalletSend {
 
@@ -29,6 +30,7 @@ interface WalletSend {
         val addressInput: String,
         val addressIsValid: Boolean,
         val amountInput: String,
+        val amountFiat: BigDecimal,
         val amountIsValid: Boolean,
         val isEnableConfirmButton: Boolean,
         val isLoading: Boolean,

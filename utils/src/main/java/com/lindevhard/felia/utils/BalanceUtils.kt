@@ -257,20 +257,17 @@ object BalanceUtils {
         var value: BigDecimal = value
         var df: DecimalFormat = getFormat(pattern)
         value = value.divide(
-            BigDecimal.valueOf(Math.pow(10.0, decimals.toDouble())),
+            BigDecimal.valueOf(10.0.pow(decimals.toDouble())),
             18,
             RoundingMode.DOWN
         )
         if (macroPrecision > 0) {
             val displayThreshold: BigDecimal = BigDecimal.ONE.multiply(
                 BigDecimal.valueOf(
-                    Math.pow(
-                        10.0,
-                        macroPrecision.toDouble()
-                    )
+                    10.0.pow(macroPrecision.toDouble())
                 )
             )
-            if (value.compareTo(displayThreshold) > 0) {
+            if (value > displayThreshold) {
                 //strip decimals
                 df = getFormat(MACRO_PATTERN)
             }

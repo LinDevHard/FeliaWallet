@@ -11,6 +11,7 @@ val stateToModel: (WalletSendStore.State) -> WalletSend.Model =
             addressIsValid = it.addressIsValid,
             amountInput = it.amountInput,
             amountIsValid = it.amountIsValid,
+            amountFiat = it.amountFiat,
             isEnableConfirmButton = it.addressIsValid && it.amountIsValid &&
                     it.amountInput.isNotEmpty() && it.addressInput.isNotEmpty(),
             isLoading = it.isLoading,
