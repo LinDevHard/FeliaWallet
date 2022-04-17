@@ -3,6 +3,7 @@
 package com.lindevhard.felia.ui.wallet
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -94,14 +95,20 @@ fun WalletSendUi(component: WalletSend) {
     }
     ModalBottomSheetLayout(
         sheetContent = {
-            QrScreen(
-                onQrCodeRecognized = { address ->
-                    component.updateAddress(address)
-                    scope.launch {
-                        scaffoldState.hide()
-                    }
+            if(!scaffoldState.isVisible) {
+                Box(Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
-            )
+            } else {
+                QrScreen(
+                    onQrCodeRecognized = { address ->
+                        component.updateAddress(address)
+                        scope.launch {
+                            scaffoldState.hide()
+                        }
+                    }
+                )
+            }
         },
         sheetState = scaffoldState
     ) {
